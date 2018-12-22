@@ -67,11 +67,11 @@
       (`(,shipper ,tracking-number) (list tracking-number (intern shipper))))))
 
 (defun shipmate-org--url (link-target)
-  "Return a URL for LINK-TARGET."
+  "Return a package tracking URL for LINK-TARGET."
   (apply #'shipmate-tracking-url (shipmate-org--shipper link-target)))
 
 (defun shipmate-org-open (link-target)
-  "Open URL for LINK-TARGET."
+  "Open package tracking for LINK-TARGET."
   (if-let ((url (shipmate-org--url link-target)))
       (browse-url url)
     (error "Link `%s' is malformed" link-target)))
