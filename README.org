@@ -23,7 +23,7 @@
    To enable Org link support:
 
    #+BEGIN_SRC emacs-lisp -n -r
-   (require ‘shipmate-org)
+   (require 'shipmate-org)
    #+END_SRC
 
    Links are in the format:
