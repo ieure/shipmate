@@ -1,0 +1,50 @@
+* Shipmate
+
+  Shipmate is a library for matching and linking tracking numbers.
+  The core is an extensible mechanism for defining shippers and their
+  tracking number formats.  Shipmate can integrate with Org mode and
+  ERC.
+
+** Shippers
+
+   Shipmate supports the following shippers:
+
+   - USPS
+   - UPS
+   - FedEx
+   - Japan Post
+
+   You can define your own shippers by customizing
+   =SHIPMATE-SHIPPERS=.  Contributions welcomed.
+
+
+** Org link specification
+
+   To enable Org link support:
+
+   #+BEGIN_SRC emacs-lisp -n -r
+   (require ‘shipmate-org)
+   #+END_SRC
+
+   Links are in the format:
+
+   #+BEGIN_EXAMPLE
+   shipmate:TRACKING-NUMBER
+   #+END_EXAMPLE
+
+   Shipmate will detect the shipper based on the tracking number.  You
+   may also explicitly specify the shipper:
+
+   #+BEGIN_EXAMPLE
+   shipmate:SHIPPER/TRACKING-NUMBER
+   #+END_EXAMPLE
+
+   In this example, =SHIPPER= is the name of a symbol from
+   =SHIPMATE-SHIPPERS=.
+
+
+** Future plans
+
+   It would be terrific to use shippers’ APIs to extend
+   functionality.  For example, creating an Org entry with a scheduled
+   date of the expected delivery date.
