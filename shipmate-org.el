@@ -40,9 +40,14 @@
 (require 'shipmate)
 (require 'org)
 
-(org-link-set-parameters "shipmate"
-                         :follow #'shipmate-org-open
-                         :export #'shipmate-org-export)
+(if (fboundp 'org-link-set-parameters)
+    (org-link-set-parameters "shipmate"
+                             :follow #'shipmate-org-open
+                             :export #'shipmate-org-export)
+  ;; For older Org mode
+  (org-add-link-type "shipmate"
+                     #'shipmate-org-open
+                     #'shipmate-org-export))
 
 (defun shipmate-org--shipper (link-target)
   "Detect or extract shipper from LINK-TARGET.
