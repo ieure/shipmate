@@ -135,7 +135,8 @@
    NIL if no match."
   (shipmate--detect* tracking-number? shipmate-shippers))
 
-(defun shipmate--tracking-url (tracking-number &optional shipper)
+;;;###autoload
+(defun shipmate-tracking-url (tracking-number &optional shipper)
   "Return the URL to track shipment TRACKING-NUMBER?
 
    When SHIPPER is set to a symbol in SHIPMATE-SHIPPERS, open that
@@ -147,6 +148,7 @@
       (format (plist-get (cdr (assoc shipper shipmate-shippers)) :url)
               tracking-number)))
 
+;;;###autoload
 (defun shipmate-browse-url (tracking-number &optional shipper)
   "Open tracking for TRACKING-NUMBER.
 
