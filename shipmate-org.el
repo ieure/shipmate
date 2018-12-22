@@ -62,14 +62,21 @@
       (`(,shipper ,tracking-number) (list tracking-number (intern shipper))))))
 
 (defun shipmate-org--url (link-target)
+  "Return a URL for LINK-TARGET."
   (apply #'shipmate-tracking-url (shipmate-org--shipper link-target)))
 
 (defun shipmate-org-open (link-target)
+  "Open URL for LINK-TARGET."
   (if-let ((url (shipmate-org--url link-target)))
       (browse-url url)
-    (error "Link `%s' is malformed." link-target)))
+    (error "Link `%s' is malformed" link-target)))
 
 (defun shipmate-org-export (path desc format)
+  "Handle Org export of Shipmate links.
+
+  PATH is the link path.
+  DESC is the link description (if any).
+  FORMAT is the export format."
   (cl-destructuring-bind (tracking shipper) (shipmate-org--shipper path)
     (let ((url (shipmate-tracking-url tracking shipper))
           (desc (or desc
@@ -77,7 +84,7 @@
 
       (pcase (list format url)
         (`(html nil) (prog1 desc
-                       (warn "Link `%s' is malformed." path)))
+                       (warn "Link `%s' is malformed" path)))
         (`(html ,url)
          (format "<a href=\"%s\">%s</a>" url desc))
         (`(ascii _) desc)
